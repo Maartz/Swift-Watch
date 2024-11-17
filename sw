@@ -80,10 +80,9 @@ fi
 
 # Function to watch and execute Swift commands
 watch_and_execute() {
-  # Clear the terminal scrollback and current terminal screen
-  # Thanks gutenberg, many thanks
-  clear && printf '\033c'
-  find . -name "*.swift" | entr -r swift "$@"
+  # Use `entr` to watch for file changes and execute commands
+  # Thanks gutenberg, many thanks, for real this time ;)
+  find . -name "*.swift" | entr -r bash -c "clear && printf '\033c'; swift $*"
 }
 
 # Parse arguments
